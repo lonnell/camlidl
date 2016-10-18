@@ -1,16 +1,14 @@
 opam-version: "1.2"
 name: "camlidl"
-version: "1.05"
-maintainer: "Nicolas Berthier <m@nberth.space>"
+version: "1.06"
+maintainer: "Lonnell L. Ahiyya <lonnell@mekanisys.com>"
 authors: "Xavier Leroy"
 homepage: "http://caml.inria.fr/pub/old_caml_site/camlidl/"
-bug-reports: "http://forge.ocamlcore.org/tracker/?group_id=132"
 license: "QPL-1.0 and LGPL-2 with exceptions"
 build: [
-  ["mv" "config/Makefile.unix" "config/Makefile"]
+  ["cp" "config/Makefile.unix" "config/Makefile"]
     {os = "darwin" | os = "linux" | os = "freebsd" | os = "bsd" | os = "unix" |
      os = "cygwin"}
-  ["mv" "config/Makefile.win32" "config/Makefile"] {os = "win32"}
   ["mkdir" "-p" bin "%{lib}%/camlidl" "%{lib}%/camlidl/caml"]
   [make "all"]
 ]
