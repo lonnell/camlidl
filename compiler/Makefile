@@ -24,7 +24,7 @@ OBJS=config.cmo utils.cmo clflags.cmo \
   fixlabels.cmo normalize.cmo \
   version.cmo main.cmo
 
-PROG=camlidl$(EXE)
+PROG=camlidl2$(EXE)
 
 all: $(PROG)
 
@@ -32,7 +32,7 @@ $(PROG): $(OBJS)
 	$(OCAMLC) -o $(PROG) $(OBJS)
 
 clean::
-	rm -f $(PROG)
+	rm -f $(PROG) 
 
 parser_midl.ml parser_midl.mli: parser_midl.mly
 	$(OCAMLYACC) parser_midl.mly

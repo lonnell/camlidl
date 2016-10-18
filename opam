@@ -1,5 +1,5 @@
 opam-version: "1.2"
-name: "camlidl"
+name: "camlidl2"
 version: "1.06"
 maintainer: "Lonnell L. Ahiyya <lonnell@mekanisys.com>"
 authors: "Xavier Leroy"
@@ -9,7 +9,7 @@ build: [
   ["cp" "config/Makefile.unix" "config/Makefile"]
     {os = "darwin" | os = "linux" | os = "freebsd" | os = "bsd" | os = "unix" |
      os = "cygwin"}
-  ["mkdir" "-p" bin "%{lib}%/camlidl" "%{lib}%/camlidl/caml"]
+  ["mkdir" "-p" bin "%{lib}%/camlidl2" "%{lib}%/camlidl2/caml"]
   [make "all"]
 ]
-install: [make "install" "BINDIR=%{bin}%" "OCAMLLIB=%{lib}%/camlidl"]
+install: [make "install" "BINDIR=%{bin}%" "OCAMLLIB=%{lib}%/camlidl2"]

@@ -64,12 +64,12 @@ let print_version () =
     
 let print_version_verbose () =
   Printf.printf
-    "The Camlidl interface generation compiler, version %s\n" @@
+    "The Camlidl2 interface generation compiler, version %s\n" @@
     Version.version_string ()
 ;;
   
 (* main entry point *)
-let _ =
+let main () =
   try
     Arg.parse
       (Arg.align
@@ -99,8 +99,10 @@ let _ =
           " Print verbose version and exit"
       ])
       process_file
-      "Usage: camlidl [options] <.idl file> ... <.idl file>\nOptions are:\n"
+      "Usage: camlidl2 [options] <.idl file> ... <.idl file>\nOptions are:\n"
   with Error ->
     exit 2
 ;;
+  
+let _ = main () ;;
   
