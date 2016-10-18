@@ -22,7 +22,7 @@ OBJS=config.cmo utils.cmo clflags.cmo \
   file.cmo predef.cmo \
   linenum.cmo parse_aux.cmo parser_midl.cmo lexer_midl.cmo parse.cmo \
   fixlabels.cmo normalize.cmo \
-  main.cmo
+  version.cmo main.cmo
 
 PROG=camlidl$(EXE)
 
