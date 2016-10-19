@@ -1,6 +1,6 @@
 let maj = 1 ;;
 let min = 6 ;;
-let rev = 0 ;;
+let rev = 1 ;;
 
 let version () =
   maj, min, rev

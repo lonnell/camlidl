@@ -1,6 +1,6 @@
 opam-version: "1.2"
 name: "camlidl2"
-version: "1.06"
+version: "1.06.1"
 maintainer: "Lonnell L. Ahiyya <lonnell@mekanisys.com>"
 authors: "Xavier Leroy"
 homepage: "http://caml.inria.fr/pub/old_caml_site/camlidl/"
