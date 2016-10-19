@@ -2,9 +2,10 @@ opam-version: "1.2"
 name: "camlidl2"
 version: "1.06.1"
 maintainer: "Lonnell L. Ahiyya <lonnell@mekanisys.com>"
-authors: [["Xavier Leroy"] ["Lonnell L. Ahiyya"]
+authors: ["Xavier Leroy" "Lonnell L. Ahiyya"]
 homepage: "http://caml.inria.fr/pub/old_caml_site/camlidl/"
 license: "QPL-1.0 and LGPL-2 with exceptions"
+dev-repo: "https://github.com/lonnell/camlidl.git"
 build: [
   ["cp" "config/Makefile.unix" "config/Makefile"]
     {os = "darwin" | os = "linux" | os = "freebsd" | os = "bsd" | os = "unix" |
@@ -14,3 +15,4 @@ build: [
 ]
 install: [make "install" "BINDIR=%{bin}%" "OCAMLLIB=%{lib}%/camlidl2"]
 remove: ["ocamlfind" "remove" "camlidl2"]
+depends: "ocamlfind"
