@@ -1,0 +1,4 @@
+description = "Stub generator"
+version = "@ver_maj@.@ver_min@.@ver_rev@"
+archive(byte) = "com.cma"
+archive(native) = "com.cmxa"

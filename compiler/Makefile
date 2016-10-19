@@ -1,95 +1,58 @@
-#***********************************************************************
-#*                                                                     *
-#*                              CamlIDL                                *
-#*                                                                     *
-#*            Xavier Leroy, projet Cristal, INRIA Rocquencourt         *
-#*                                                                     *
-#*  Copyright 1999 Institut National de Recherche en Informatique et   *
-#*  en Automatique.  All rights reserved.  This file is distributed    *
-#*  under the terms of the GNU Library General Public License.         *
-#*                                                                     *
-#***********************************************************************
+modname := camlidl2
+modeps 	:= 
 
-#* $Id: Makefile,v 1.6 2002/01/16 09:42:00 xleroy Exp $
+MLFILES := \
+	config \
+	utils \
+	clflags \
+	prefix \
+	lexpr \
+	cvttyp \
+	variables \
+	array \
+	struct \
+	enum \
+	union \
+	cvtval \
+	structdecl \
+	enumdecl \
+	uniondecl \
+	typedef \
+	funct \
+	constdecl \
+	intf \
+	file \
+	predef \
+	linenum \
+	parse_aux \
+	parser_midl \
+	lexer_midl \
+	parse \
+	fixlabels \
+	normalize \
+	version \
+	main
 
-include ../config/Makefile
+MLIFILES = \
+	Trig_float
 
-OBJS=config.cmo utils.cmo clflags.cmo \
-  prefix.cmo lexpr.cmo cvttyp.cmo variables.cmo \
-  array.cmo struct.cmo enum.cmo union.cmo cvtval.cmo \
-  structdecl.cmo enumdecl.cmo uniondecl.cmo \
-  typedef.cmo funct.cmo constdecl.cmo intf.cmo \
-  file.cmo predef.cmo \
-  linenum.cmo parse_aux.cmo parser_midl.cmo lexer_midl.cmo parse.cmo \
-  fixlabels.cmo normalize.cmo \
-  version.cmo main.cmo
+MLYFILES = \
+	parser_midl
 
-PROG=camlidl2$(EXE)
+MLLFILES = \
+	linenum \
+	lexer_midl
 
-all: $(PROG)
+TARGET	:= $(modname)
 
-$(PROG): $(OBJS)
-	$(OCAMLC) -o $(PROG) $(OBJS)
+-include $(TOPDIR)/common.mk
 
-clean::
-	rm -f $(PROG) 
+#all: byte-code-library
 
-parser_midl.ml parser_midl.mli: parser_midl.mly
-	$(OCAMLYACC) parser_midl.mly
+-include $(OCAMLMAKEFILE)
 
-clean::
-	rm -f parser_midl.ml parser_midl.mli parser_midl.output
-
-beforedepend:: parser_midl.ml parser_midl.mli
-
-lexer_midl.ml: lexer_midl.mll
-	$(OCAMLLEX) lexer_midl.mll
-
-clean::
-	rm -f lexer_midl.ml
-
-beforedepend:: lexer_midl.ml
-
-config.ml: config.mlp ../config/Makefile
-	-rm -f config.ml
-	sed -e 's|%%CPP%%|$(CPP)|' \
-          config.mlp > config.ml
-	-chmod -w config.ml
-
-clean::
-	rm -f config.ml
-
-beforedepend:: config.ml
-
-linenum.ml: linenum.mll
-	$(OCAMLLEX) linenum.mll
-
-clean::
-	rm -f linenum.ml
-
-beforedepend:: linenum.ml
-
-.SUFFIXES: .ml .mli .cmo .cmi .cmx
-
-.ml.cmo:
-	$(OCAMLC) -c $<
-
-.mli.cmi:
-	$(OCAMLC) -c $<
-
-.ml.cmx:
-	$(OCAMLOPT) -c $<
-
-# Install
 install:
-	cp $(PROG) $(BINDIR)
-
-# Clean up
-clean::
-	rm -f *.cm[iox] *~
-
-# Dependencies
-depend: beforedepend
-	$(OCAMLDEP) *.mli *.ml > .depend
-
-include .depend
+	$(OCAMLFIND) install \
+		-destdir $(INSTALLDIR) \
+		-add \
+		$(NAME) $(INSTFILES) 	

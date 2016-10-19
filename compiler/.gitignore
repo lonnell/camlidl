@@ -5,3 +5,4 @@ linenum.ml
 parser_midl.ml
 parser_midl.mli
 parser_midl.output
+version.ml

@@ -1,40 +1,61 @@
-#***********************************************************************
-#*                                                                     *
-#*                              CamlIDL                                *
-#*                                                                     *
-#*            Xavier Leroy, projet Cristal, INRIA Rocquencourt         *
-#*                                                                     *
-#*  Copyright 1999 Institut National de Recherche en Informatique et   *
-#*  en Automatique.  All rights reserved.  This file is distributed    *
-#*  under the terms of the GNU Library General Public License.         *
-#*                                                                     *
-#***********************************************************************
+TOPDIR := $(shell pwd)
+export TOPDIR
 
-#* $Id: Makefile,v 1.18 2000/08/19 11:04:55 xleroy Exp $
+INSTALLDIR := $(shell ocamlfind printconf destdir)
+export INSTALLDIR 
 
-include config/Makefile
+NAME	:= camlidl2
+export NAME
 
-all:
-	cd compiler; $(MAKE) all
-	cd runtime; $(MAKE) all
-	cd lib; $(MAKE) all
-	cd tools; $(MAKE) all
+modules		:= \
+		compiler \
+		lib \
+		runtime
 
-install:
-	cd compiler; $(MAKE) install
-	cd runtime; $(MAKE) install
-	cd lib; $(MAKE) install
-	cd tools; $(MAKE) install
+src_prefix	= .
+mod_dirs	= $(patsubst %, ${src_prefix}/%, $(modules))
+
+autocruft	:= \
+		aclocal.m4 \
+		autom4te.cace \
+		configure \
+		config.log \
+		config.status
+
+all: $(modules)
 
 clean:
-	cd compiler; $(MAKE) clean
-	cd runtime; $(MAKE) clean
-	cd lib; $(MAKE) clean
-	cd tools; $(MAKE) clean
+	$(MAKE) TARGET=clean -C .
 
-depend:
-	cd compiler; $(MAKE) depend
-	cd runtime; $(MAKE) depend
-	cd lib; $(MAKE) depend
-	cd tools; $(MAKE) depend
+distclean:
+	rm -rf $(autocruft)
+	$(MAKE) TARGET=clean -C .
 
+configure: configure.ac
+	./autogen.sh
+	./configure
+
+install: meta $(modules)
+	ocamlfind install -destdir $(INSTALLDIR) $(NAME) META
+	$(MAKE) TARGET=install -C .
+
+uninstall:
+	ocamlfind remove $(NAME)
+
+reinstall: uninstall
+	$(MAKE) -C . install
+
+# build our meta file by concatenating together
+meta: META
+
+$(mod_dirs):
+	$(MAKE) -C $@ $(TARGET)
+
+compiler: $(src_prefix)/compiler
+runtime: $(src_prefix)/runtime
+lib: $(src_prefix)/lib
+
+# ordering dependencies
+
+# phonies
+.PHONY: all clean distclean configure meta install uninstall reinstall $(modules)
