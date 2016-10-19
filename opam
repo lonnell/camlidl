@@ -2,7 +2,7 @@ opam-version: "1.2"
 name: "camlidl2"
 version: "1.06.1"
 maintainer: "Lonnell L. Ahiyya <lonnell@mekanisys.com>"
-authors: "Xavier Leroy"
+authors: ["Xavier Leroy" "Lonnell L. Ahiyya"]
 homepage: "http://caml.inria.fr/pub/old_caml_site/camlidl/"
 license: "QPL-1.0 and LGPL-2 with exceptions"
 build: [

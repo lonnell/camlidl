@@ -1,4 +1,4 @@
 description = "Stub generator"
-version = "1.06"
+version = "1.06.1"
 archive(byte) = "com.cma"
 archive(native) = "com.cmxa"
