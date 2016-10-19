@@ -70,7 +70,9 @@ AC_SUBST(ver_rev)
 # Configuration files
 # ######################################################################
 AC_CONFIG_FILES([opam
-		 META])
+		 META
+		 compiler/version.ml
+		 compiler/config.ml])
 
 # ######################################################################
 # Write configuration files
