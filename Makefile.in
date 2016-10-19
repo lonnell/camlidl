@@ -2,27 +2,29 @@
 # Configurations
 # ------------------------------------------------------------------------------
 TOPDIR 		:= $(shell pwd)
-PREFIX 		:= @prefix@ 
-BINDIR 		:= $(PREFIX)/bin
-INSTALLDIR 	:= $(PREFIX)/lib
+exec_prefix 	:= @prefix@
+BINDIR 		:= @bindir@
+INSTALLDIR 	:= @libdir@
 NAME		:= camlidl2
+DESTDIR		:= ${INSTALLDIR}/$(NAME)
 
 # ------------------------------------------------------------------------------
 # Exports
 # ------------------------------------------------------------------------------
 export TOPDIR
-export PREFIX 
+#export PREFIX 
 export BINDIR
 export INSTALLDIR
 export NAME
+export DESTDIR
 
 # ------------------------------------------------------------------------------
 # Module directories
 # ------------------------------------------------------------------------------
 modules		:= \
 		compiler \
-		lib
-#		runtime
+		lib \
+		runtime
 
 src_prefix	= .
 mod_dirs	= $(patsubst %, ${src_prefix}/%, $(modules))
@@ -55,6 +57,7 @@ install: meta $(modules)
 	$(MAKE) TARGET=install -C .
 
 uninstall:
+	rm -rf $(DESTDIR)/caml
 	ocamlfind remove $(NAME)
 
 reinstall: uninstall

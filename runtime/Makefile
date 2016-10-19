@@ -10,8 +10,37 @@
 #*                                                                     *
 #***********************************************************************
 
-#* $Id: Makefile,v 1.2 2000/08/19 11:04:59 xleroy Exp $
+SOURCES	:= \
+	idlalloc.c \
+	comintf.c \
+	comerror.c 
 
-include ../config/Makefile
+OBJS	:= $(patsubst %.c, %.o, $(SOURCES))
 
-include Makefile.$(OSTYPE)
+-include $(TOPDIR)/common.mk
+
+TARGET	:= libcamlidl2.a
+
+all: $(TARGET) 
+
+$(TARGET): $(OBJS)
+	- rm -f $@
+	ar rc $@ $(OBJS)
+	ranlib $@
+
+install:
+	-mkdir -p $(DESTDIR)/caml
+	-cp camlidlruntime.h $(DESTDIR)/caml
+	-cp libcamlidl2.a $(DESTDIR)
+
+#clean:
+#	rm -f *.a *.o
+
+%.o: %.c
+	$(OCAMLC) -ccopt "$(CFLAGS)" $<
+
+-include $(OCAMLMAKEFILE)
+
+$(OBJS): camlidlruntime.h comstuff.h
+
+depend:

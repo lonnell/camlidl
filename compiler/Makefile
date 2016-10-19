@@ -89,7 +89,7 @@ OCAMLLDFLAGS = $(OCAMLFLAGS)
 all: byte-code
 
 install:
-	-install $(RESULT) $(BINDIR)
+	-cp $(RESULT) $(BINDIR)
 
 # ------------------------------------------------------------------------------
 # OCamlMakefile rules 

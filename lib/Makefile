@@ -18,6 +18,6 @@ install:
 	$(OCAMLFIND) install \
 		-destdir $(INSTALLDIR) \
 		-add \
-		$(NAME) $(LIBINSTALL_FILES) 	
+		$(NAME) com.cma com.cmi 
 
 .PHONY: install
