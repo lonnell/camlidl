@@ -33,9 +33,6 @@ install:
 	-cp camlidlruntime.h $(DESTDIR)/caml
 	-cp libcamlidl2.a $(DESTDIR)
 
-#clean:
-#	rm -f *.a *.o
-
 %.o: %.c
 	$(OCAMLC) -ccopt "$(CFLAGS)" $<
 
