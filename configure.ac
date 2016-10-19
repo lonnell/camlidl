@@ -29,19 +29,11 @@ if expr "$OCAMLVERSION" '<' '4.02.0' > /dev/null ; then
 fi
 
 # ######################################################################
-# Check for Camlp4
-# ######################################################################
-dnl AC_PROG_CAMLP4
-dnl if test "x$CAMLP4" = "xno"; then
-dnl   AC_MSG_ERROR([You must install the Camlp4 preprocessor])
-dnl fi
-
-# ######################################################################
 # Check for OCaml findlib
 # ######################################################################
 AC_PROG_FINDLIB
 if test "x$OCAMLFIND" = "xno"; then
-   AC_MSG_WARN([you must install the OCaml findlib (the ocamlfind command)])
+   AC_MSG_WARN([you must install OCaml findlib (the ocamlfind command)])
 fi
 
 # ######################################################################
