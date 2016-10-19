@@ -14,7 +14,8 @@
 (* Compile-time configuration *)
 
 (* How to invoke the C preprocessor *)
-let cpp = "@CPP@"
+(* let cpp = "@CPP@" *)
+let cpp = "cpp"
 
 (* The C names for 64-bit signed and unsigned integers *)
 let (int64_type, uint64_type) =
