@@ -37,6 +37,15 @@ if test "x$OCAMLFIND" = "xno"; then
 fi
 
 # ######################################################################
+# Check for C preprocessor
+# ######################################################################
+AC_PROG_CPP
+if test "x$CPP" = "xno"; then
+  AC_MSG_ERROR([a C pre-processor is required])
+fi
+AC_SUBST(CPP)
+
+# ######################################################################
 # Check for C compiler
 # ######################################################################
 AC_PROG_CC
@@ -61,7 +70,8 @@ AC_SUBST(ver_rev)
 # ######################################################################
 # Configuration files
 # ######################################################################
-AC_CONFIG_FILES([opam
+AC_CONFIG_FILES([Makefile
+		 opam
 		 META
 		 compiler/version.ml
 		 compiler/config.ml])
