@@ -20,8 +20,8 @@ export NAME
 # Module directories
 # ------------------------------------------------------------------------------
 modules		:= \
-		compiler
-#		lib \
+		compiler \
+		lib
 #		runtime
 
 src_prefix	= .

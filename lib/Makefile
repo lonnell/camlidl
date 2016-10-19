@@ -1,52 +1,23 @@
-#***********************************************************************
-#*                                                                     *
-#*                              CamlIDL                                *
-#*                                                                     *
-#*            Xavier Leroy, projet Cristal, INRIA Rocquencourt         *
-#*                                                                     *
-#*  Copyright 1999 Institut National de Recherche en Informatique et   *
-#*  en Automatique.  All rights reserved.  This file is distributed    *
-#*  under the terms of the GNU Library General Public License.         *
-#*                                                                     *
-#***********************************************************************
+modname := com
+modeps 	:= 
 
-#* $Id: Makefile,v 1.4 2002/04/22 11:50:47 xleroy Exp $
+MLFILES := \
+	com
 
-include ../config/Makefile
+MLIFILES = \
+	com
 
-BYTEOBJS=com.cmo
-BYTELIB=com.cma
-NATIVEOBJS=$(BYTEOBJS:.cmo=.cmx)
-NATIVELIB=$(BYTELIB:.cma=.cmxa)
-INTERFACES=$(BYTEOBJS:.cmo=.cmi)
+-include $(TOPDIR)/common.mk
 
-all: $(BYTELIB) $(NATIVELIB)
+RESULT	:= $(modname)
 
-$(BYTELIB): $(BYTEOBJS)
-	$(OCAMLC) -a -o $(BYTELIB) $(BYTEOBJS)
+all: byte-code-library
+-include $(OCAMLMAKEFILE)
 
-$(NATIVELIB): $(NATIVEOBJS)
-	$(OCAMLOPT) -a -o $(NATIVELIB) $(NATIVEOBJS)
+install: 
+	$(OCAMLFIND) install \
+		-destdir $(INSTALLDIR) \
+		-add \
+		$(NAME) $(LIBINSTALL_FILES) 	
 
-install:
-	cp $(INTERFACES) $(BYTELIB) $(NATIVELIB) $(NATIVELIB:.cmxa=.$(LIBEXT)) $(OCAMLLIB)
-	cd $(OCAMLLIB); $(RANLIB) $(NATIVELIB:.cmxa=.$(LIBEXT))
-
-.SUFFIXES: .mli .ml .cmi .cmo .cmx
-
-.mli.cmi:
-	$(OCAMLC) -c $<
-.ml.cmo:
-	$(OCAMLC) -c $<
-.ml.cmx:
-	$(OCAMLOPT) -c $<
-
-# Clean up
-clean::
-	rm -f *.cm[ioax] $.cmxa *~
-
-# Dependencies
-depend:
-	$(OCAMLDEP) *.mli *.ml > .depend
-
-include .depend
+.PHONY: install
